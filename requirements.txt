@@ -1,0 +1,9 @@
+matplotlib
+numpy~=1.26.4
+opencv-python~=4.9.0.80
+pillow
+tensorflow~=2.15.0
+pandas
+keras~=2.13.0
+torch
+torchvision

@@ -1,0 +1,37 @@
+Need to cite:
+1.
+https://www.geeksforgeeks.org/elbow-method-for-optimal-value-of-k-in-kmeans/
+
+2.
+https://www.analyticsvidhya.com/blog/2020/12/an-approach-towards-neural-network-based-image-clustering/
+
+3.
+https://datascience.stackexchange.com/questions/14039/tool-to-label-images-for-classification
+
+4.
+(Used sections of code for feature_extraction.py)
+https://www.tensorflow.org/tutorials/load_data/images#using_tfdata_for_finer_control
+
+5.
+https://stackoverflow.com/questions/37340129/tensorflow-training-on-my-own-image
+
+6. (Loading Custom dataset in Tensorflow)
+https://www.youtube.com/watch?v=q7ZuZ8ZOErE
+
+7.
+https://stackoverflow.com/questions/75858278/loading-image-data-from-pandas-dataframe-with-path-and-class-label-to-pytorch-da
+
+8. (Splitting dataset into train test)
+https://medium.com/nerd-for-tech/easily-split-your-directory-into-train-validation-and-testing-format-f1359f34dd93
+
+9.
+https://www.kaggle.com/code/abdraouf/gpu-resnet-50
+
+10.
+https://www.tutorialspoint.com/color-identification-in-images-using-python-and-opencv
+
+11.(Training Validation Curve)
+https://www.tensorflow.org/tutorials/images/classification
+
+12.
+https://stackoverflow.com/questions/19201290/how-to-save-a-dictionary-to-a-file
