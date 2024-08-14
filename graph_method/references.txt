@@ -1,0 +1,11 @@
+For autoencoder:
+https://www.geeksforgeeks.org/implementing-an-autoencoder-in-pytorch/
+
+For torch custom classes:
+https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class
+
+For GCN tutorial:
+https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780
+
+For GraphDataset creation:
+https://colab.research.google.com/drive/1_eR7DXBF3V4EwH946dDPOxeclDBeKNMD?usp=sharing#scrollTo=uk2_4e67omHF
