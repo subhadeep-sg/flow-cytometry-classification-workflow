@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
-from color_classify.metrics import result_visualizer
-from color_classify.feature_vectors import reading_feature_vector
+from color_classification.color_classify.feature_vectors import reading_feature_vector
 from sklearn.metrics.pairwise import cosine_similarity
-import itertools
 from torch_geometric.data import Data
 
-root_dir = 'C:/DATA/UGASem5/GNNReferenceCodes/GraphStructures/ColorBasedGraphs/'
+root_dir = '../../graph_method/'
+
 # df = pd.read_csv(root_dir + 'filename_list.csv')
 fv = reading_feature_vector(file=root_dir + 'featurevector.txt',
                             as_arr=True, dtype='float32', verbose=False)

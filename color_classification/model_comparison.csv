@@ -1,0 +1,6 @@
+model,accuracy,f1 score rbc,f1 score wbc,f1 score wbc_platelet,roc-auc
+SVC,0.6951,0.25,0.8283,0.0,0.6447
+KNeighborsClassifier,0.6637,0.2308,0.7944,0.1231,0.6933
+RandomForestClassifier,0.704,0.3077,0.8215,0.2388,0.7306
+XGBClassifier,0.6861,0.3077,0.808,0.2254,0.6611
+LGBMClassifier,0.6771,0.2759,0.8047,0.2785,0.7003

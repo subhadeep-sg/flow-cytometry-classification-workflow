@@ -3,17 +3,14 @@ The first step is to take our images and obtain color vectors, either by color h
 or by mean color values. This should ideally simplify and reduce dataset size when
 building the graph structure.
 """
-import os.path as osp
-import cv2
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import time
 from sklearn.metrics.pairwise import cosine_similarity
-import seaborn as sns
 import networkx as nx
 from sklearn.neighbors import kneighbors_graph
-from color_classify.histogram import get_feature_vector
+from color_classification.color_classify.histogram import get_feature_vector
+from color_classification.color_classify.feature_vectors import saving_feature_vector
 
 st = time.time()
 
@@ -44,6 +41,8 @@ graph = nx.from_scipy_sparse_array(knn_graph)
 
 nx.draw(graph)
 plt.savefig("knngraph.png")
+
+saving_feature_vector(fv)
 
 print('Time taken:', time.time() - st)
 

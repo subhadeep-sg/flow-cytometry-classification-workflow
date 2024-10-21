@@ -1,19 +1,19 @@
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import LabelEncoder
 
 from autoencoder import FeatureVecDataset, AutoEncoder
 import matplotlib.pyplot as plt
 import torch
 import pandas as pd
 
-from color_classify.metrics import result_visualizer
-from color_classify.feature_vectors import reading_feature_vector
+from color_classification.color_classify.metrics import result_visualizer, cluster_scoring
+from color_classification.color_classify.feature_vectors import reading_feature_vector
 from torch.utils.data import DataLoader
-from torchvision.transforms import ToTensor
 import time
 import numpy as np
 
 st = time.time()
-root_dir = 'C:/DATA/UGASem5/GNNReferenceCodes/GraphStructures/ColorBasedGraphs/'
+root_dir = '../../graph_method/'
 # df = pd.read_csv(root_dir + 'filename_list.csv')
 fv = reading_feature_vector(file=root_dir + 'featurevector.txt',
                             as_arr=True, dtype='float32', verbose=False)
@@ -28,11 +28,12 @@ print('Loader shape: ', len(loader))
 
 model = AutoEncoder().to(device=device)
 loss_fn = torch.nn.MSELoss()
+lr_factor = 1
 optimizer = torch.optim.Adam(model.parameters(),
-                             lr=1e-2,
-                             weight_decay=1e-8)
+                             lr=0.001 * lr_factor,
+                             weight_decay=1e-4)     # 1e-8
 
-epochs = 20
+epochs = 100     # 20
 outputs = []
 losses = []
 train_time = time.time()
@@ -67,20 +68,35 @@ plt.show()
 
 # Inference step to get prediction from trained model
 predictions = []
+fmaps = []
 with torch.no_grad():
     for dat in loader:
         dat = dat.to(device)
         predictions.append(model(dat).tolist()[0])
+        mapping = model.encoder(dat).tolist()[0]
+        fmaps.append(mapping)
 
 predictions = np.array(predictions)
 print(predictions)
 
-# Clustering on the predicted data
-km_ae = KMeans(n_clusters=3, random_state=0).fit(predictions)
-km_ae_labels = km_ae.labels_
+image_csv = '../../color_classification/groundtruths.csv'
+df = pd.read_csv(image_csv, index_col=False)
+labels = df['label'].tolist()
+labels = LabelEncoder().fit_transform(labels)
 
-image_csv = root_dir + 'filename_list.csv'
-df = pd.read_csv(image_csv)
-result_visualizer(df, km_ae_labels, model_name='KMeans+AE', multi_channels=True, num_samples=8)
+# Clustering on the predicted data
+km_ae = KMeans(n_clusters=3, random_state=0).fit(predictions)                   #predictions)
+km_ae_labels = km_ae.labels_
+cluster_scoring(labels, km_ae_labels, 'Autoencoder + Kmeans')
+
+# image_csv = root_dir + 'filename_list.csv'
+# df = pd.read_csv(image_csv)
+#
+# df = df.replace({'../MasterDataset': 'C:/DATA/UGASem5/FlowCytometry/flow-cytometry-classification-workflow'
+#                                      '/MasterDataset'}, regex=True)
+#
+# print(len(df))
+
+# result_visualizer(df, km_ae_labels, model_name='KMeans+AE', multi_channels=True, num_samples=8)
 
 print("Total runtime: {}".format(time.time() - st))

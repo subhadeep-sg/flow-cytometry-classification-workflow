@@ -35,3 +35,27 @@ https://www.tensorflow.org/tutorials/images/classification
 
 12.
 https://stackoverflow.com/questions/19201290/how-to-save-a-dictionary-to-a-file
+
+13. PyTorch dataset class
+https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class
+
+14. PyTorch Image classification tutorial
+https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+
+15. Calculating accuracy of model
+https://saturncloud.io/blog/calculating-the-accuracy-of-pytorch-models-every-epoch/
+
+16. Adding class_weights due to imbalanced data
+https://discuss.pytorch.org/t/passing-the-weights-to-crossentropyloss-correctly/14731
+
+17. HSV color pallette
+https://stackoverflow.com/questions/36817133/identifying-the-range-of-a-color-in-hsv-using-opencv
+
+18. Idea of stacking multiple inputs using parallel models
+https://stackoverflow.com/questions/67837978/stack-of-images-as-single-input-to-cnn
+
+19. Implementing Cross validation
+https://discuss.pytorch.org/t/cross-validation-in-pytorch/120182/2
+
+20. Plotting ROC Curve
+https://stackoverflow.com/questions/25009284/how-to-plot-roc-curve-in-python
