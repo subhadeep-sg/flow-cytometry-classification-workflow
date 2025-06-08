@@ -18,9 +18,7 @@ from sklearn.model_selection import train_test_split
 import warnings
 
 warnings.filterwarnings('ignore')
-"""
-Attempting to use a small subset of the data to learn and classify 
-"""
+
 st = time.time()
 fv = reading_feature_vector(file='../graph_method/featurevector.txt', as_arr=True, verbose=False)
 df = pd.read_csv('groundtruths.csv', index_col=False)
@@ -28,14 +26,12 @@ fv_labels = np.array(df['label'].tolist())
 print(fv.shape)
 print(fv_labels.shape)
 
-# Preprocessing feature vector
 new_fv = StandardScaler().fit_transform(fv)
 new_fv = VarianceThreshold(threshold=0.2).fit_transform(new_fv)
 # new_fv = PCA(n_components=50, random_state=42).fit_transform(scaled)
 print(f'Post processing: {new_fv.shape}')
 
-# Getting train, test, valid splits.
-# Starting with very low training data
+
 test_size = 0.3
 valid_split = 0.2
 train_size = 1 - test_size
@@ -60,7 +56,7 @@ print(f'Valid set contains {X_val.shape[0]} rows')
 # model.fit(X_train, y_train)
 # pred = model.predict(X_val)
 
-# Organizing a dataframe to store results
+
 res_df = pd.DataFrame(columns=['model', 'accuracy', 'f1 score rbc', 'f1 score wbc', 'f1 score wbc_platelet', 'roc-auc'])
 
 

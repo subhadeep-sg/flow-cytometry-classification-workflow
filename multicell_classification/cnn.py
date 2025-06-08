@@ -26,16 +26,17 @@ class ImageDataset(Dataset):
         self.transform = transforms
         self.target_transform = target_transforms
 
-        self.label_mapping = {'particles': 0, 'single': 1, 'multi': 2}
-
+        # self.label_mapping = {'particles': 0, 'single': 1, 'multi': 2}
+        self.label_mapping = {'cluster_revised': 0, 'non_cluster_revised': 1}
         if self.df is not None and self.mode != 'predict':
             self.label_list = self.df['class_label'].tolist()
             self.label_list = [self.label_mapping[label] for label in self.label_list]
-        elif self.mode != 'predict':
-            self.label_list = [path.split('\\')[-1] for path, _, filenames in os.walk(self.img_dir) for file in
-                               filenames]
-            self.class_names = ['particles', 'single', 'multi']
-            self.label_list = [self.label_mapping[label] for label in self.label_list]
+        # elif self.mode != 'predict':
+        #     self.label_list = [path.split('\\')[-1] for path, _, filenames in os.walk(self.img_dir) for file in
+        #                        filenames]
+        #     # self.class_names = ['particles', 'single', 'multi']
+        #     self.class_names = ['cluster_revised', 'non_cluster_revised']
+        #     self.label_list = [self.label_mapping[label] for label in self.label_list]
 
     def __len__(self):
         return len(self.filelist)
@@ -43,7 +44,13 @@ class ImageDataset(Dataset):
     def __getitem__(self, idx):
         if self.df is not None:
             image = self.filelist[idx]
-            image = cv2.imread(image)
+            image = cv2.imread(image)   #, cv2.IMREAD_GRAYSCALE)
+
+            # clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            # image = clahe.apply(image)
+            # image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+            image = cv2.GaussianBlur(image, (5, 5), 0)
+
             image = cv2.resize(image, self.dim)
             if self.transform:
                 image = self.transform(image)
@@ -51,6 +58,12 @@ class ImageDataset(Dataset):
         else:
             image_path = self.filelist[idx]
             image = cv2.imread(image_path)
+
+            # clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            # image = clahe.apply(image)
+            # image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+            image = cv2.GaussianBlur(image, (5, 5), 0)
+
             image = cv2.resize(image, self.dim)
             if self.transform:
                 image = self.transform(image)
@@ -69,7 +82,7 @@ class ImageDataset(Dataset):
 
 
 class ConvNet(nn.Module):
-    def __init__(self, num_channels=3, img_size=224, batch_size=4, device=torch.device('cuda')):
+    def __init__(self, num_channels=3, output_size=3, img_size=224, batch_size=4, device=torch.device('cuda')):
         super().__init__()
         self.kernel_size = 6
         self.conv1 = nn.Conv2d(num_channels, 6, self.kernel_size)
@@ -95,7 +108,7 @@ class ConvNet(nn.Module):
         self.fc1 = nn.Linear(conv_output_size, 120)
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 42)
-        self.fc4 = nn.Linear(42, 3)
+        self.fc4 = nn.Linear(42, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
         self.device = device
 

@@ -59,3 +59,6 @@ https://discuss.pytorch.org/t/cross-validation-in-pytorch/120182/2
 
 20. Plotting ROC Curve
 https://stackoverflow.com/questions/25009284/how-to-plot-roc-curve-in-python
+
+21. For help with prompt improving
+https://www.grademyprompt.com/

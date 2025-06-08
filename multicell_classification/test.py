@@ -105,7 +105,7 @@ class_weights = torch.FloatTensor(class_weights).cuda()
 loss_fn = nn.CrossEntropyLoss(weight=class_weights)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-model_path = f'./saved_models/18102024_0929_88_model.pt'
+model_path = f'./saved_models/22102024_1217_90_model.pt'
 model = torch.load(model_path, weights_only=False)
 model.eval()
 results = test_model(model, loader=test_dataloader,

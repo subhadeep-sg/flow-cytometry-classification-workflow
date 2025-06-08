@@ -69,16 +69,15 @@ def disp_train_dataset(img_dir, lim=20):
                 break
 
 
-def mean_std_computation(img_dir):
+def mean_std_computation(img_df=None, img_dir=None):
     # Computing mean and std of image dataset for normalization
     tf = transforms.Compose([
         transforms.ToPILImage(),
         transforms.RandomVerticalFlip(p=0.5),
-        # transforms.ColorJitter(),
         transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
     ])
-    base_ds = ImageDataset(img_dir=img_dir, mode='train', transforms=tf)
+    base_ds = ImageDataset(dataframe=img_df, mode='train', transforms=tf)
     loader = DataLoader(base_ds, batch_size=1, shuffle=True)
 
     mean, std, total_images_count = 0, 0, 0

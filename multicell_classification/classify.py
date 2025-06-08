@@ -282,7 +282,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # plot_accuracy(history)
 
 
-k = 4
+k = 3
 batch_size = 16
 y_train_val = train_val_df['class_label']
 X_train_val = train_val_df.drop(columns=['class_label'])

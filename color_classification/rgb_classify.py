@@ -237,7 +237,7 @@ for fold, (train_index, val_index) in enumerate(kf.split(X_train_val, y_train_va
     # print(f'Train set:\n{train_df}\n')
     # print(f'Valid set:\n{val_df}\n')
 
-    # New model initialization every fold
+
     rgbnet = RGBConvNet(num_channels=3, device=device, batch_size=batch_size).to(device)
     opt = Adam(rgbnet.parameters(), lr=0.001 * lr_factor, weight_decay=1e-4)
 
@@ -258,7 +258,7 @@ for fold, (train_index, val_index) in enumerate(kf.split(X_train_val, y_train_va
     cv_results.append(results)
 
 cv_df = pd.DataFrame.from_records(cv_results)
-cv_df.to_csv('cross_validation_results.csv', index=False)
+cv_df.to_csv('cross_validation_2025_results.csv', index=False)
 print('Cross validation results saved to cross_validation_results.csv')
 
 # batch_size = 16

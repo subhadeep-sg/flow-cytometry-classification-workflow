@@ -31,18 +31,32 @@ image_csv = 'filename_list.csv'
 df = pd.read_csv(image_csv)
 fv = get_feature_vector(df)
 
+example_vector = fv[1]
+
+px = 256
+example_hist = example_vector[px:px*2]
+colors = ('red', 'green', 'blue')
+plt.figure(figsize=(7, 2))
+plt.plot(example_hist, color='green')
+plt.fill_between(range(256), example_hist.flatten(), color='green', alpha=0.3)
+plt.title('Average Color Histogram')
+plt.show()
+
+def plot_images_stack(df):
+
+
 # Obtain cosine similarity
 similarity_matrix = cosine_similarity(fv)
 print(similarity_matrix)
 
-# Construct graph
-knn_graph = kneighbors_graph(fv, n_neighbors=3, metric='cosine')
-graph = nx.from_scipy_sparse_array(knn_graph)
-
-nx.draw(graph)
-plt.savefig("knngraph.png")
-
-saving_feature_vector(fv)
+# # Construct graph
+# knn_graph = kneighbors_graph(fv, n_neighbors=3, metric='cosine')
+# graph = nx.from_scipy_sparse_array(knn_graph)
+#
+# nx.draw(graph)
+# plt.savefig("knngraph.png")
+#
+# saving_feature_vector(fv)
 
 print('Time taken:', time.time() - st)
 

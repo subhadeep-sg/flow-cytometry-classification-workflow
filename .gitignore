@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environment files
+.env
+.venv/
+venv/
+
+*.zip
+
+
+# Logs and outputs
+*.pt
+*.log
+*.out
+*.bak
+
+# Test and data dumps
+
+*.npz
+*.csv
+*.json
+
+# PDFs, plots, generated reports
+*.pdf
+/.gitignore
